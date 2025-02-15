@@ -1,7 +1,8 @@
 import os
 from setuptools import setup, find_packages
 
-VERSION = os.environ['RELEASE_VERSION']
+# v0.1.0 is a default for local clone installation
+VERSION = os.environ.get('RELEASE_VERSION', '0.1.0')
 
 with open('README.md', 'r') as f:
     long_description = f.read()
