@@ -1,12 +1,14 @@
 import os
 import json
 import time
+import logging
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .constants import *
 from .exceptions import *
 
+logger = logging.getLogger(__name__)
 
 def _read_json(file_path):
     """Helper function for reading .json files (for CLI config)."""
@@ -120,7 +122,10 @@ def _handle_request(
                     res_str = res_str.decode('utf-8')
 
                 if len(res_str) > 0:
-                    res_data = json.loads(res_str)
+                    try:
+                        res_data = json.loads(res_str)
+                    except json.decoder.JSONDecodeError as e:
+                        logger.debug(f"Got unexpected (non-json) response: {res_data}")
 
             _save_last_response(res_data)
             return res_data
