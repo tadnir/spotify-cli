@@ -6,9 +6,11 @@ DEFAULT_HEADERS = {
     'Content-Type': 'application/json'
 }
 
-# credential storage
+# system paths
 HOME = os.path.expanduser('~')
-SYSTEM_CONFIG_DIR = os.path.join(HOME, '.config')
+SYSTEM_CONFIG_DIR = os.environ.get("XDG_CONFIG_HOME", os.path.join(HOME, '.config'))
+
+# credential storage
 APP_CONFIG_DIR = os.path.join(SYSTEM_CONFIG_DIR, 'spotify-cli')
 CREDS_PATH = os.path.join(APP_CONFIG_DIR, 'credentials.json')
 CONFIG_PATH = os.path.join(APP_CONFIG_DIR, 'config.json')
