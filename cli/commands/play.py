@@ -1,4 +1,5 @@
 import click
+import time
 
 from ..utils import Spotify
 from ..utils.functions import retry
@@ -125,6 +126,7 @@ def play(
 
     if not quiet:
         from cli.commands.status import status
+        time.sleep(0.5)
         retry(
             status.callback,
             retries=3, sleep=0.5, catch=TypeError,
