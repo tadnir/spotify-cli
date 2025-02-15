@@ -27,7 +27,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        spotify=cli.spotify:cli
+        spotlify=cli.spotify:cli
     ''',
     classifiers=[
         'Programming Language :: Python :: 3',
