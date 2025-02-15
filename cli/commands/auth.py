@@ -3,6 +3,7 @@ import json
 import time
 
 import click
+import beaupy
 
 from ..utils import Spotify
 from ..utils.constants import *
@@ -61,8 +62,6 @@ def login(client_id='', client_secret=''):
     })
 
     # select scopes
-    import webbrowser
-    from PyInquirer import prompt
     enabled_scopes = Spotify.get_config().get('auth_scopes', [])
     choices = []
     for scope in AUTH_SCOPES_MAPPING:
@@ -77,20 +76,11 @@ def login(client_id='', client_secret=''):
         'By default, spotify-cli will enable reading & '
         'modifying the playback state.\n'
     )
-    choice = prompt([{
-        'type': 'checkbox',
-        'name': 'scopes',
-        'message': (
-            'Please select which additional features '
-            'you want to authorize.'
-        ),
-        'choices': choices,
-    }])
-    if not choice:
-        return
+    click.echo('Please select which additional features you want to authorize.')
+    choice = beaupy.select_multiple(options=choices, preprocessor=lambda c: c["name"])
 
     # confirm
-    additional_scopes = choice.get('scopes', [])
+    additional_scopes = [c["name"] for c in choice]
     click.echo(
         '\n{} features selected. This will overwite your existing credentials.'
         .format(len(additional_scopes))
@@ -98,6 +88,7 @@ def login(client_id='', client_secret=''):
     click.confirm('Proceed with these settings?', default=True, abort=True)
 
     # handle auth and save credentials
+    import webbrowser
     url = build_auth_url(additional_scopes, client_id)
     webbrowser.open(url)
     click.echo(

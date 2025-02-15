@@ -22,7 +22,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Click',
-        'PyInquirer',
+        'beaupy',
         'tabulate',
     ],
     entry_points='''

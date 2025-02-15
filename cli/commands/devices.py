@@ -1,4 +1,5 @@
 import click
+import beaupy
 
 from ..utils import Spotify
 from ..utils.exceptions import NoPlaybackError
@@ -101,20 +102,14 @@ def devices(verbose=False, switch_to='', raw=False):
         )
 
         # interactive prompt
-        from PyInquirer import prompt
-        questions = [{
-            'type': 'list',
-            'name': 'formatted_name',
-            'message': message,
-            'choices': choices,
-        }]
-        choice = prompt(questions)
+        click.echo(message)
+        choice = beaupy.select(list(choices), preprocessor=lambda x: x["name"])
         if not choice:
-            return
+            return 
 
         matched_devices = [
             x for x in devices_list
-            if choice['formatted_name'] == x['formatted_name']
+            if choice["value"] == x['formatted_name']
         ]
 
     to_activate = matched_devices[0]
