@@ -1,4 +1,5 @@
 import click
+import time
 
 from ..utils import Spotify
 from ..utils.exceptions import NoPlaybackError
@@ -21,6 +22,7 @@ def _next(verbose=0, quiet=False):
     )
     if not quiet:
         from cli.commands.status import status
+        time.sleep(0.5)
         status.callback(verbose=verbose)
 
     return
