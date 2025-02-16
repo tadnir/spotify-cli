@@ -20,6 +20,7 @@ from cli.commands.toggle import toggle
 from cli.commands.top import top
 from cli.commands.search import search
 from cli.commands.seek import seek
+from cli.commands.lists import lists
 
 
 # CLI group
@@ -52,3 +53,4 @@ cli.add_command(toggle)
 cli.add_command(top)
 cli.add_command(search)
 cli.add_command(seek)
+cli.add_command(lists)

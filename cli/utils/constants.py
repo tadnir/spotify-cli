@@ -35,14 +35,14 @@ AUTH_SCOPES_MAPPING = [
            'user-read-recently-played',
         ],
     },
-    # {
-    #     'value': 'playlists-read',
-    #     'name': 'Read user playlists.',
-    #     'scopes': [
-    #         'playlist-read-collaborative',
-    #         'playlist-read-private',
-    #     ],
-    # },
+    {
+        'value': 'playlists-read',
+        'name': 'Read user playlists.',
+        'scopes': [
+            'playlist-read-collaborative',
+            'playlist-read-private',
+        ],
+    },
     # {
     #     'value': 'playlists-modify',
     #     'name': 'Modify user playlists.',
