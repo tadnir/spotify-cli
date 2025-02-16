@@ -118,6 +118,7 @@ def search(
         if cmd == 'n':
             try:
                 pager.next()
+                print_table = True
             except PagerLimitReached:
                 click.echo('\nThere are no more results to display.')
                 continue
@@ -125,6 +126,7 @@ def search(
         elif cmd == 'b':
             try:
                 pager.previous()
+                print_table = True
             except PagerPreviousUnavailable:
                 click.echo('\nYou are already at the first page.')
                 continue
